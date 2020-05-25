@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rest/Spread</title>
+</head>
+
+<body>
+  <script>
+    'use strict'
+    {
+      //----------------------------------------------------
+      //
+      //与えられた引き数を別のところに展開するときに役立つ
+      //のがrestとspread
+      //---------------------------rest----------------------
+
+      // function addNumbers(numbers) {
+      //   return numbers.reduce((total, number) => {
+      //     return total + number;
+      //   }, 0);
+      // }
+      // console.log(addNumbers([1, 2, 3, 4, 5, 6])); 
+      //ここを配列の形ではなく普通に渡したい時にどうするのか
+      //ex(1,2,3,4,5,6,7,8)...
+
+      function addNumbers(...numbers) { //この中では配列になって展開されている
+        return numbers.reduce((total, number) => {
+          return total + number;
+        }, 0);
+      }
+      console.log(addNumbers(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+      //---------------------------spred------------------------
+      //まとまっているものを分解してくれる
+      //配列の中身を別の配列に展開する
+      const defaultColors = ['黄', '緑'];
+      const addColors = ['赤', '青'];
+
+      console.log([...addColors, ...defaultColors]); //['赤','青','黄','緑']
+      console.log([addColors, ...defaultColors]); //[['赤','青'],'黄','緑']
+      console.log([...addColors, '黒', ...defaultColors]); //['赤','青','黒','黄','緑']
+
+
+      //validateShoppingListの中にパンが入ってなかったらパンを配列の最後に入れて配列にして返してくれる関数
+      function validateShoppingList(...items) {
+        if (items.indexOf('パン') < 0) {
+          return [...items, 'パン'] //['チョコ','卵','パン']
+        }
+        return items; //['チョコ','パン','卵']
+      }
+
+      console.log(validateShoppingList('チョコ', '卵'))
+      console.log(validateShoppingList('チョコ', 'パン', '卵'))
+
+
+
+    }
+  </script>
+</body>
+
+</html>
